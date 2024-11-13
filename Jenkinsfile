@@ -48,6 +48,13 @@ pipeline {
                 echo 'La aplicación Django debería estar en ejecución en el contenedor ComisariaApp'
             }
         }
+
+        stage('Check Docker Images') {
+            steps {
+                sh 'docker images'
+            }
+}
+
     }
 
     post {
