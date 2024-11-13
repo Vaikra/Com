@@ -27,20 +27,20 @@ pipeline {
             }
         }
 
-        stage('Initialize Database') {
-            steps {
+        //stage('Initialize Database') {
+            //steps {
                 // Carga los datos de data.sql a la base de datos MySQL una vez que el contenedor está listo
                 // Usa el contenedor llamado "db_Comisaria" como definido en docker-compose.yml
-                script {
+                //script {
                     // Espera a que el contenedor de MySQL esté en estado healthy
-                    sh 'docker-compose exec db_Comisaria mysql -uroot -ppass -e "SELECT 1"'
+                    //sh 'docker-compose exec db_Comisaria mysql -uroot -ppass -e "SELECT 1"'
                 }
                 // Carga el archivo SQL en la base de datos
-                sh '''
-                docker-compose exec -T db_Comisaria mysql -uroot -ppass comisaria_db < MySQL/data.sql
-                '''
-            }
-        }
+                //sh '''
+                //docker-compose exec -T db_Comisaria mysql -uroot -ppass comisaria_db < MySQL/data.sql
+                //'''
+            //}
+        //}
 
         stage('Run Application') {
             steps {
