@@ -1,0 +1,41 @@
+{% extends 'comisaria/base.html' %}
+
+{%block titulo %} Casos {% endblock %}
+
+{% block contenido %}
+<div class="d-flex justify-content-end mb-3">
+    <a class="btn btn-success" href="{% url 'caso_crear' %}">Agregar Caso</a>
+</div>
+    {% if casos %}
+    <div class="container my-5">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Nombre clave</th>
+                    <th>Numero de placa</th>
+                    <th>Estatus</th>
+                    <th>Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for caso in casos %}
+                <tr>
+                    <td>{{ caso.titulo }}</td>
+                    <td>{{ caso.num_placa.num_placa }}</td>
+                    <td>{{ caso.get_estatus_display }}</td>
+                    <td><a class="btn btn-primary btn-sm" href="{% url 'caso_deta' caso.id %}">Ver</a> | 
+                        <a class="btn btn-warning btn-sm" href="{% url 'caso_edit' caso.id  %}">Editar</a> | 
+                        <a class="btn btn-danger btn-sm" href="{% url 'caso_eliminar' caso.id  %}">Eliminar</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+    <p>Sin casos que mostrar</p>
+    {% endif %}
+    {% if message_error %}
+    <p>Formulario Invalido</p>
+    {% endif %}
+
+{% endblock %}

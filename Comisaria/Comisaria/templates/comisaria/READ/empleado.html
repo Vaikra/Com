@@ -1,0 +1,40 @@
+{% extends 'comisaria/base.html' %}
+
+{%block titulo %} Empleados {% endblock %}
+
+{% block contenido %}
+    {% if empleados %}
+    <div class="d-flex justify-content-end mb-3">
+        <a class="btn btn-success" href="{% url 'empleado_crear' %}">Agregar Empleado</a>
+    </div>
+   <div class="container my-5">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Nombre(s)</th>
+                <th>Apellido Paterno</th>
+                <th>Puesto</th>
+                <th>Salario</th>
+                <th>Editar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for emp in empleados %}
+            <tr>
+                <td>{{ emp.username }}</td>
+                <td>{{ emp.first_name }}</td>
+                <td>{{ emp.last_name }}</td>
+                <td>{{ emp.get_puesto_display }}</td>
+                <td>{{ emp.salario }}</td>
+                <td><a class="btn btn-primary btn-sm" href="{% url 'empleado_deta' emp.id %}">Ver</a> | <a class="btn btn-warning btn-sm" href="{% url 'empleado_edit' emp.id %}">Editar</a> | <a class="btn btn-danger btn-sm" href="{% url 'empleado_eliminar' emp.id  %}">Eliminar</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+   </div>
+    {% else %}
+    <p>Sin empleados que mostrar</p>
+    {% endif %}
+
+{% endblock %}
