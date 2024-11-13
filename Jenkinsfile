@@ -53,14 +53,14 @@ pipeline {
             steps {
                 sh 'docker images'
             }
-}
+        }
 
     }
 
-    post {
+     /*post {
         always {
             // Detener y limpiar los contenedores al final del pipeline
             sh 'docker-compose down'
         }
-    }
+    }*/
 }
